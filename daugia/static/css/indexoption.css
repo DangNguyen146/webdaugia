@@ -1,0 +1,180 @@
+.indexoption .heading-title {
+    margin-bottom: 100px;
+}
+
+.indexoption .text-center {
+    text-align: center;
+}
+
+.indexoption .heading-title h3 {
+    margin-bottom: 0;
+    letter-spacing: 2px;
+    font-weight: normal;
+}
+
+.indexoption .p-top-30 {
+    padding-top: 30px;
+}
+
+.indexoption .half-txt {
+    width: 60%;
+    margin: 0 auto;
+    display: inline-block;
+    line-height: 25px;
+    color: #7e7e7e;
+}
+
+.indexoption .text-uppercase {
+    text-transform: uppercase;
+}
+
+.indexoption .team-member,
+.indexoption .team-member .team-img {
+    position: relative;
+}
+
+.indexoption .team-member {
+    overflow: hidden;
+}
+
+.indexoption .team-member,
+.indexoption .team-member .team-img {
+    position: relative;
+}
+
+.indexoption .team-hover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    margin: 0;
+    border: 20px solid rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 0.90);
+    opacity: 0;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+
+.indexoption .team-member:hover .team-hover .desk {
+    top: 35%;
+}
+
+.indexoption .team-member:hover .team-hover,
+.indexoption .team-member:hover .team-hover .desk,
+.indexoption .team-member:hover .team-hover .s-link {
+    opacity: 1;
+}
+
+.indexoption .team-hover .desk {
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    opacity: 0;
+    -webkit-transform: translateY(-55%);
+    -ms-transform: translateY(-55%);
+    transform: translateY(-55%);
+    -webkit-transition: all 0.3s 0.2s;
+    transition: all 0.3s 0.2s;
+    padding: 0 20px;
+}
+
+.indexoption .desk,
+.indexoption .desk h4,
+.indexoption .team-hover .s-link a {
+    text-align: center;
+    color: #222;
+}
+
+.indexoption .team-member:hover .team-hover .s-link {
+    bottom: 10%;
+}
+
+.indexoption .team-member:hover .team-hover,
+.indexoption .team-member:hover .team-hover .desk,
+.indexoption .team-member:hover .team-hover .s-link {
+    opacity: 1;
+}
+
+.indexoption .team-hover .s-link {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    opacity: 0;
+    text-align: center;
+    -webkit-transform: translateY(45%);
+    -ms-transform: translateY(45%);
+    transform: translateY(45%);
+    -webkit-transition: all 0.3s 0.2s;
+    transition: all 0.3s 0.2s;
+    font-size: 35px;
+}
+
+.indexoption .desk,
+.indexoption .desk h4,
+.indexoption .team-hover .s-link a {
+    text-align: center;
+    color: #222;
+}
+
+.indexoption .team-member .s-link a {
+    margin: 0 10px;
+    color: #333;
+    font-size: 16px;
+}
+
+.indexoption .team-title {
+    position: static;
+    padding: 20px 0;
+    display: inline-block;
+    letter-spacing: 2px;
+    width: 100%;
+}
+
+.indexoption .team-title h5 {
+    margin-bottom: 0px;
+    display: block;
+    text-transform: uppercase;
+}
+
+.indexoption .team-title span {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #a5a5a5;
+    letter-spacing: 1px;
+}
+
+.indexoption .light-txt {
+    color: #fff !important;
+}
+
+.indexoption .team-member .team-intro.light-txt h5 {
+    color: #fff;
+}
+
+.indexoption .team-member,
+.indexoption .team-member .team-img {
+    position: relative;
+}
+
+.indexoption .team-member .team-intro.light-txt span {
+    color: rgba(255, 255, 255, .5);
+    font-size: 12px;
+}
+
+.indexoption .team-member .team-intro h5,
+.indexoption .team-member .team-intro.light-txt span {
+    margin-bottom: 0px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.indexoption .team-member .team-intro {
+    position: absolute;
+    right: 0;
+    bottom: 30px;
+    background: rgba(0, 0, 0, .7);
+    padding: 10px 20px;
+    width: 70%;
+    text-align: right;
+}
