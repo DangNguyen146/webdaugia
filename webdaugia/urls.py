@@ -23,5 +23,7 @@ from daugia.views import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Home)
+    path('', Home, name="home"),
+    path('login/', LoginUser, name="loginUser"),
+    path('register/', Register, name="registerUser"),
 ]

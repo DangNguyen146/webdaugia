@@ -1,0 +1,124 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Login | Auction E-commerce</title>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8 col-md-6">
+            <div class="box w-100 text-white">
+                <div class="displays p-5 w-100">
+                    <h2 class="text-center">REGISTER</h2>
+                    <div class="infowrapper">
+                        <form method="post" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row my-2">
+                                <div class="col-6">
+                                    <div class="form-outline">
+                                        <input type="text" name="firstname" id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-outline">
+                                        <input type="text" name="lastname" id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Last Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-8 my-2">
+                                    <div class="form-outline">
+                                        <input type="email" name="email" id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-outline">
+                                        <input type="text" name="username" id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Username</label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-6">
+                                    <div class="form-outline">
+                                        <input type="password" name="password" id="form3Example1"
+                                            class="form-control" />
+                                        <label class="form-label" for="form3Example1">Enter Password</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-outline">
+                                        <input type="password" id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Re Enter Password</label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="row my-2">
+
+                                <div class="col-12 my-2">
+                                    <div class="form-outline">
+                                        <input type="text" name="contact" id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Contact</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 my-2">
+                                    <div class="form-outline">
+                                        <input type="text" name="address" id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 my-2">
+                                    <div class="form-outline">
+                                        <input type="date" name="dob" id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Enter Date of Birth</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="formFile" class="form-label">Avatar</label>
+                                    <input class="form-control" name="image" type="file" id="formFile">
+                                </div>
+
+                                <div class="form-group col-md-12">
+                                    <label for="inputEmail4">Register As</label><br>
+                                    <div style="border:1px solid lightgrey;padding:5px;border-radius:6px">
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadioInline1" name="reg"
+                                                class="custom-control-input" value="Seller">
+                                            <label class="custom-control-label" for="customRadioInline1">Seller</label>
+                                        </div>
+                                        <div class="custom-control custom-radio custom-control-inline">
+                                            <input type="radio" id="customRadioInline2" name="reg"
+                                                class="custom-control-input" value="Bidder">
+                                            <label class="custom-control-label" for="customRadioInline2">Bidder</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mt-4">Sign in</button>
+                        </form>
+                        <!-- Register buttons -->
+                        <div class="text-center mt-5">
+                            <p>Is a member? <a href="/login">Login</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+</div>
+{% endblock %}

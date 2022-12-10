@@ -1,0 +1,90 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Login | Auction E-commerce</title>
+{% endblock %}
+
+{% block toast %}
+{% if result == "not" %}
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/5234/5234326.png" width="10px" class="rounded me-2" alt="...">
+        <strong class="me-auto">Alert</strong>
+        <small class="text-muted">Now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Username & Password are not Matching!
+    </div>
+</div>
+{% endif %}
+{% if result == "register" %}
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/5234/5234326.png" class="rounded me-2" alt="...">
+        <strong class="me-auto">Alert</strong>
+        <small class="text-muted">Now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Register complete! Please login to comtinue.
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8 col-md-6">
+            <div class="box w-100 text-white">
+                <div class="displays p-5 w-100">
+                    <h2 class="text-center">LOGIN</h2>
+                    <div class="infowrapper">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <!-- Email input -->
+                            <div class="form-outline mb-4">
+                                <input type="text" id="form1Example1" name="username" class="form-control" />
+                                <label class="form-label" for="form1Example1">Username</label>
+                            </div>
+
+                            <!-- Password input -->
+                            <div class="form-outline mb-4">
+                                <input type="password" id="form1Example2" name="password" class="form-control" />
+                                <label class="form-label" for="form1Example2">Password</label>
+                            </div>
+
+                            <!-- 2 column grid layout for inline styling -->
+                            <div class="row mb-4">
+                                <div class="col d-flex justify-content-center">
+                                    <!-- Checkbox -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" value="" id="form1Example3"
+                                            checked />
+                                        <label class="form-check-label" for="form1Example3"> Remember me </label>
+                                    </div>
+                                </div>
+
+                                <div class="col">
+                                    <!-- Simple link -->
+                                    <a href="#!">Forgot password?</a>
+                                </div>
+                            </div>
+
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block">Sign in</button>
+                        </form>
+                        <!-- Register buttons -->
+                        <div class="text-center mt-5">
+                            <p>Not a member? <a href="/register">Register</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+</div>
+{% endblock %}

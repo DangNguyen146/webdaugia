@@ -3,6 +3,22 @@
 <title>Homepage | Auction E-commerce</title>
 {% endblock %}
 
+{% block toast %}
+{% if result != "not" %}
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/5234/5234326.png" width="10px" class="rounded me-2" alt="...">
+        <strong class="me-auto">Alert</strong>
+        <small class="text-muted">Now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Login successfully!
+    </div>
+</div>
+{% endif %}
+{% endblock %}
+
 {% block body %}
 <div class="container box ">
     <div class="infobox">
@@ -26,7 +42,7 @@
         </p>
 
         <div class="infobox-btnwrapper mt-3">
-            <a type="nav-link" class="btn btn-purpulgrdiant" href="#">JOIN NOW!</a>
+            <a type="nav-link" class="btn btn-purpulgrdiant" href="login">JOIN NOW!</a>
         </div>
     </div>
     <div class="display">

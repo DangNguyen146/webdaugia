@@ -32,7 +32,7 @@
     <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid justify-content-between">
             <!-- Toggle button -->
-            <a class="d-block d-md-none navbar-brand me-2 mb-1 d-flex align-items-center navlogo" href="#">
+            <a class="d-block d-md-none navbar-brand me-2 mb-1 d-flex align-items-center navlogo" href="/">
                 AUCTIONMK
             </a>
             <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
@@ -46,7 +46,7 @@
                 <!-- Left elements -->
                 <div class="d-none d-md-block d-flex">
                     <!-- Brand -->
-                    <a class="navbar-brand me-2 mb-1 d-flex align-items-center navlogo" href="#">
+                    <a class="navbar-brand me-2 mb-1 d-flex align-items-center navlogo" href="/">
                         AUCTIONMK
                     </a>
                 </div>
@@ -77,10 +77,10 @@
                 <!-- Right elements -->
                 <ul class="navbar-nav flex-row">
                     <li class="nav-item me-3 me-lg-1">
-                        <a type="nav-link" class="btn btn-purpulgrdiant" href="#">Login</a>
+                        <a type="nav-link" class="btn btn-purpulgrdiant" href="/login">Login</a>
                     </li>
                     <li class="nav-item me-3 me-lg-1">
-                        <a type="nav-link" class="btn btn-outline-purpulgrdiant " href="#">Register</a>
+                        <a type="nav-link" class="btn btn-outline-purpulgrdiant " href="/register">Register</a>
                     </li>
 
                 </ul>
@@ -96,7 +96,11 @@
     {% block body %}
 
     {% endblock %}
-    
+
+    {% block toast %}
+
+    {% endblock %}
+
 
     <!-- Remove the container if you want to extend the Footer to full width. -->
     <div class="mt-5 footter">
