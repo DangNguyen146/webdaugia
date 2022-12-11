@@ -299,10 +299,37 @@ def AddMoneyToWallet(request):
 
 # ///////////////// admin
 
+def new():
+    status = Status.objects.get(status="Pending")
+    new_pro = Product.objects.filter(status=status)
+    return new_pro
+
+
 def AdminHome(request):
     if not request.user.is_staff:
         return redirect('home')
+
+    new2 = new()
+    count = 0
+    if new2:
+        count += 1
+
+    all_p = 0
+    all_b = 0
+    all_s = 0
+    pro = Product.objects.all()
+    bid = BidderUser.objects.all()
+    sel = AuctionUser.objects.all()
+
+    for i in pro:
+        all_p += 1
+    for i in bid:
+        all_b += 1
+    for i in sel:
+        all_s += 1
+
     user = User.objects.get(username=request.user.username)
+
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -319,7 +346,8 @@ def AdminHome(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    d = {'data': data, 'result': result, 'count': count, 'new2': new2,
+         'all_p': all_p, 'all_b': all_b, 'all_s': all_s}
     return render(request, 'dashboardadminpage.html', d)
 
 

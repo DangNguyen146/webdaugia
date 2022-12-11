@@ -705,7 +705,8 @@ h6 {
   padding: 10px 15px;
   border-radius: 4px;
 }
-.sidebar-nav .nav-link.active{
+
+.sidebar-nav .nav-link.active {
   background: #f6f9ff;
 }
 
@@ -836,6 +837,11 @@ h6 {
   height: 64px;
   flex-shrink: 0;
   flex-grow: 0;
+}
+
+.dashboard .start-card .card-icon {
+  color: #b941f1;
+  background: #fdf6fe;
 }
 
 .dashboard .sales-card .card-icon {
