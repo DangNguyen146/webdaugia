@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 from .models import *
 from django.contrib.auth.models import User
@@ -7,7 +7,55 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def Home(request):
-    return render(request, 'homepage.html')
+    data = 0
+    error = ""
+    user = ""
+    try:
+        user = User.objects.get(username=request.user.username)
+    except:
+        pass
+    try:
+        data = BidderUser.objects.get(user=user)
+        if data:
+            error = "pat"
+            return redirect('profile1')
+    except:
+        pass
+    try:
+        data = AuctionUser.objects.get(user=user)
+        return redirect('trainer_home')
+    except:
+        pass
+    d = {'error': error, 'data': data}
+    return render(request, 'carousel.html', d)
+
+
+def Home(request):
+    result = ''
+    data = 0
+    user = ''
+    try:
+        user = User.objects.get(username=request.user.username)
+    except:
+        pass
+
+    try:
+        data = BidderUser.objects.get(user=user)
+        if data:
+            result = "bidder"
+            # return redirect('profile1')
+    except:
+        pass
+
+    try:
+        data = AuctionUser.objects.get(user=user)
+        result = "seller"
+        # return redirect('trainer_home')
+    except:
+        pass
+
+    d = {'result': result, 'data': data}
+    return render(request, 'homepage.html', d)
 
 
 def LoginUser(request):
@@ -30,7 +78,7 @@ def LoginUser(request):
             result = 'not'
             d = {'result': result}
             return render(request, 'login.html', d)
-        d = {'result': result}
+        d = {'result': result, 'isLogin': True}
         return render(request, 'homepage.html', d)
 
 
@@ -58,10 +106,15 @@ def Register(request):
 
         membership = MemberFee.objects.get(fee="Unpaid")
         if reg == "Bidder":
-            sign = BidderUser.objects.create(
+            BidderUser.objects.create(
                 membership=membership, user=user, contact=contact, address=address, dob=dob, image=image)
         else:
-            sign = AuctionUser.objects.create(
+            AuctionUser.objects.create(
                 membership=membership, user=user, contact=contact, address=address, dob=dob, image=image)
         d = {'result': 'register'}
         return render(request, 'login.html',  d)
+
+
+def Logout(request):
+    logout(request)
+    return redirect('home')

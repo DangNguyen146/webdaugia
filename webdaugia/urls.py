@@ -26,4 +26,16 @@ urlpatterns = [
     path('', Home, name="home"),
     path('login/', LoginUser, name="loginUser"),
     path('register/', Register, name="registerUser"),
+    path('logout', Logout, name="logout"),
+
+    path('', Home, name="viewAuction"),
+    path('', Home, name="biddingStatus"),
+    path('', Home, name="addProduct"),
+    path('', Home, name="allProduct"),
+    path('', Home, name="biddingStatus2"),
+    path('', Home, name="profile1"),
+    path('', Home, name="editProfile1"),
+    path('', Home, name="changePassword1"),
+    path('', Home, name="home"),
+    path('', Home, name="home"),
 ]
