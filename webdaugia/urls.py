@@ -41,6 +41,10 @@ urlpatterns = [
     path('dashboard', AdminHome, name="adminHome"),
 
     path('adminaddsectiondate', AdminAddSeactionDate, name="adminaddsectiondate"),
+    path('editsessiondate(<int:pid>)',
+         EditSessiondate, name='editsessiondate'),
+    path('deletesessiondate(<int:pid>)',
+         Deletesessiondate, name='deletesessiondate'),
     path('adminviewsectiondate', AdminViewSeactionDate,
          name="adminviewsectiondate"),
 
@@ -55,8 +59,10 @@ urlpatterns = [
     path('adminviewsubcategory', AdminViewSubcategory,
          name="adminviewsubcategory"),
 
-    path('adminaddproducionverification', AdminAddProducionVerification, name="adminaddproducionverification"),
-    path('adminviewproducionverification', AdminViewProducionVerification, name="adminviewproducionverification"),
+    path('adminaddproducionverification', AdminAddProducionVerification,
+         name="adminaddproducionverification"),
+    path('adminviewproducionverification', AdminViewProducionVerification,
+         name="adminviewproducionverification"),
 
     path('adminbidderuser', AdminBidderUserManager, name="adminbidderuser"),
     path('adminselleruser', AdminSellerUserManager, name="adminselleruser"),

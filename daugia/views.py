@@ -354,6 +354,7 @@ def AdminHome(request):
 def AdminAddSeactionDate(request):
     if not request.user.is_staff:
         return redirect('home')
+
     user = User.objects.get(username=request.user.username)
     if (user):
         try:
@@ -372,6 +373,10 @@ def AdminAddSeactionDate(request):
         except:
             data = AuctionUser.objects.get(user=user)
         d = {'data': data, 'result': result}
+    if request.method == 'POST':
+        d = request.POST['date']
+        SessionDate.objects.create(date=d)
+        return redirect('adminviewsectiondate')
     return render(request, 'addsectiondate.html', d)
 
 
@@ -395,8 +400,48 @@ def AdminViewSeactionDate(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    cat = SessionDate.objects.all()
+    d = {'data': data, 'result': result, 'date1': cat}
     return render(request, 'viewsectiondate.html', d)
+
+
+def EditSessiondate(request, pid):
+    if not request.user.is_staff:
+        return redirect('home')
+
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+
+    ses = SessionDate.objects.get(id=pid)
+    d = {'data': data, 'result': result, 'ses': ses}
+
+    if request.method == 'POST':
+        n = request.POST['date']
+        ses.date = n
+        ses.save()
+        return redirect('adminviewsectiondate')
+    return render(request, 'editsectiondate.html', d)
+
+
+def Deletesessiondate(request, pid):
+    cat = SessionDate.objects.get(id=pid)
+    cat.delete()
+    return redirect('adminviewsectiondate')
 
 
 def AdminAddSeactionTime(request):

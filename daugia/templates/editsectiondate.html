@@ -1,6 +1,6 @@
 {% extends 'indexadmin.html' %}
 {% block title %}
-<title>Add section date | Admin page | Auction E-commerce</title>
+<title>Edit section date | Admin page | Auction E-commerce</title>
 {% endblock %}
 
 
@@ -23,7 +23,7 @@ show
 <li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item">Time</li>
 <li class="breadcrumb-item">Sesstion Date</li>
-<li class="breadcrumb-item active">Add section date</li>
+<li class="breadcrumb-item active">Edit section date</li>
 {% endblock %}
 
 {% block body %}
@@ -32,13 +32,13 @@ show
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">Add section date</h5>
+                    <h5 class="card-title">Edit section date</h5>
                     <form method="post" action="" enctype="multipart/form-data">
                         {% csrf_token %}
                         <div class="row mb-3">
                             <label for="inputDate" class="col-sm-2 col-form-label">Date</label>
                             <div class="col-sm-10">
-                                <input type="date" name="date" class="form-control">
+                                <input type="date" value="{{ses.date}}" name="date" class="form-control">
                             </div>
                         </div>
                         <div class="row mb-3">
