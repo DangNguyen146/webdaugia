@@ -20,13 +20,42 @@
 {% if result == "register" %}
 <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
     <div class="toast-header">
-        <img src="https://cdn-icons-png.flaticon.com/512/5234/5234326.png" class="rounded me-2" alt="...">
+        <img src="https://cdn-icons-png.flaticon.com/512/5234/5234326.png" width="10px" class="rounded me-2" alt="...">
         <strong class="me-auto">Alert</strong>
         <small class="text-muted">Now</small>
         <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
     </div>
     <div class="toast-body">
         Register complete! Please login to comtinue.
+    </div>
+</div>
+
+{% if result == "changepassword" %}
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/5234/5234326.png" width="10px" class="rounded me-2" alt="...">
+        <strong class="me-auto">Alert</strong>
+        <small class="text-muted">Now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        Password change complete! Please Login!
+    </div>
+</div>
+{% endif %}
+
+
+{% endif %}
+{% if result == "nonlogin" %}
+<div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+        <img src="https://cdn-icons-png.flaticon.com/512/5234/5234326.png" class="rounded me-2" alt="...">
+        <strong class="me-auto">Alert</strong>
+        <small class="text-muted">Now</small>
+        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+    <div class="toast-body">
+        User don't login! Please login to comtinue.
     </div>
 </div>
 {% endif %}

@@ -27,15 +27,16 @@ urlpatterns = [
     path('login/', LoginUser, name="loginUser"),
     path('register/', Register, name="registerUser"),
     path('logout', Logout, name="logout"),
+    path('profileuser/', ProfileUser, name="profileUser"),
+    path('editrofileuser/', EditProfileUser, name="editProfileUser"),
+    path('changepassword', ChangePassword, name="changePassword"),
+
+    path('managerwallet', ManagerWallet, name="wallet"),
+    path('addmoneytowallet', AddMoneyToWallet, name='addMoneyToWallet'),
 
     path('', Home, name="viewAuction"),
     path('', Home, name="biddingStatus"),
     path('', Home, name="addProduct"),
     path('', Home, name="allProduct"),
     path('', Home, name="biddingStatus2"),
-    path('', Home, name="profile1"),
-    path('', Home, name="editProfile1"),
-    path('', Home, name="changePassword1"),
-    path('', Home, name="home"),
-    path('', Home, name="home"),
-]
+]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

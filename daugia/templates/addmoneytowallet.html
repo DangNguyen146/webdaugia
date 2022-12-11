@@ -1,0 +1,32 @@
+{% extends 'index2.html' %}
+{% block title %}
+<title>Wallet | Auction E-commerce</title>
+{% endblock %}
+
+{% block toast %}
+
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="main-container">
+
+    <div class="content-wrapper" style="align-items: center;">
+        <h1>Add money</h1>
+        <div style="width: 25%;">
+            <img src="{{" /media/chuyentien.jpg"}}" width="100%" alt="">
+        </div>
+        <div style="width: 100%; align-items: center; text-align: center;">
+            <form action="" method="post">
+                {% csrf_token %}
+                <p>10.000$</p>
+                <button type="submit" style=" width: 30%;" class="content-button status-button">Submit</button>
+            </form>
+        </div>
+        <a style="margin-top: 30px;" href="{% url 'wallet' %}" class="content-button status-button open">Exit</a>
+    </div>
+</div>
+
+{% endblock %}

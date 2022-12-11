@@ -1,0 +1,98 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Edit profile {{data.user.username}} | Auction E-commerce</title>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-8 col-md-6">
+            <div class="box w-100 text-white">
+                <div class="displays p-5 w-100">
+                    <h2 class="text-center">Edit profile</h2>
+                    <div class="infowrapper">
+                        <form method="post" action="" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row my-2">
+                                <div class="col-6">
+                                    <div class="form-outline">
+                                        <input type="text" name="firstname" value="{{data.user.first_name}}"
+                                            id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">First Name</label>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-outline">
+                                        <input type="text" name="lastname" value="{{data.user.last_name}}"
+                                            id="form3Example1" class="form-control" />
+                                        <label class="form-label" for="form3Example1">Last Name</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-2">
+                                <div class="col-8 my-2">
+                                    <div class="form-outline">
+                                        <input type="email" name="email" value="{{data.user.email}}" id="form3Example1"
+                                            class="form-control disabled bg-transparent text-white-50" disabled />
+                                        <label class="form-label" for="form3Example1">Email Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-8">
+                                    <div class="form-outline">
+                                        <input type="text" name="username" value="{{data.user.username}}"
+                                            id="form3Example1"
+                                            class="form-control disabled bg-transparent text-white-50" disabled />
+                                        <label class="form-label" for="form3Example1">Username</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row my-2">
+
+                                <div class="col-12 my-2">
+                                    <div class="form-outline">
+                                        <input type="text" value="{{data.contact}}" name="contact" id="form3Example1"
+                                            class="form-control" />
+                                        <label class="form-label" for="form3Example1">Contact</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-12 my-2">
+                                    <div class="form-outline">
+                                        <input type="text" name="address" value="{{data.address}}" id="form3Example1"
+                                            class="form-control" />
+                                        <label class="form-label" for="form3Example1">Address</label>
+                                    </div>
+                                </div>
+                                <div class="col-12 my-2">
+                                    <div class="form-outline">
+                                        <input type="date" name="dob" value="{{data.dob}}" id="form3Example1"
+                                            class="form-control disabled bg-transparent text-white-50" disabled />
+                                        <label class="form-label" for="form3Example1">Enter Date of Birth</label>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="formFile" class="form-label text-light ">Avatar</label>
+                                    <input class="form-control" name="image" value="{{data.image}}" type="file"
+                                        id="formFile">
+                                </div>
+                                <div class="form-group col-md-2">
+                                    <img src="{{data.image.url}}" alt="mdo" class="w-100">
+                                </div>
+
+                            </div>
+                            <!-- Submit button -->
+                            <button type="submit" class="btn btn-primary btn-block mt-4">Update</button>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+</div>
+{% endblock %}

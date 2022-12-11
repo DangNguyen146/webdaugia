@@ -1,0 +1,57 @@
+{% extends 'index2.html' %}
+{% block title %}
+<title>Wallet | Auction E-commerce</title>
+{% endblock %}
+
+{% block toast %}
+
+{% endblock %}
+
+{% block body %}
+
+
+
+<div class="main-container">
+
+    <div class="content-wrapper">
+        <div class="content-wrapper-header">
+            <div class="content-wrapper-context">
+                <h3 class="img-content" style="font-size: 1.4rem;">
+                    Wallet
+                </h3>
+                <div class="content-text" style="font-weight: 7000; font-size: 2rem;">{{data.allMoney}} $</div>
+                <a class="content-button" href="{% url 'addMoneyToWallet' %}">+ Add more money to the wallet</a>
+            </div>
+            <img class="content-wrapper-img" src="https://assets.codepen.io/3364143/glass.png" alt="">
+        </div>
+        <div class="content-section">
+            <div class="content-section-title">History</div>
+            <ul>
+                {% for i in log %}
+                <li class="adobe-product">
+                    <div class="products">
+                        {{ i.nameLog }}
+                    </div>
+                    <span class="status">
+                        {% if i.status == "0" %}
+                        <span class="status-circle green"></span>Complete
+                        {% else %}
+                        <span class="status-circle"></span>Buy success
+                        {% endif %}
+                    </span>
+                    <div class="button-wrapper">
+                        <button class="content-button status-button open">{% if i.status == "0" %} + {% else %} -
+                            {% endif %}
+                            {{ i.money }} $</button>
+                    </div>
+                </li>
+                {% endfor %}
+
+
+            </ul>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

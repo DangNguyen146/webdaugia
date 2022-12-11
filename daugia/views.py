@@ -7,30 +7,6 @@ from django.contrib.auth import authenticate, login, logout
 
 
 def Home(request):
-    data = 0
-    error = ""
-    user = ""
-    try:
-        user = User.objects.get(username=request.user.username)
-    except:
-        pass
-    try:
-        data = BidderUser.objects.get(user=user)
-        if data:
-            error = "pat"
-            return redirect('profile1')
-    except:
-        pass
-    try:
-        data = AuctionUser.objects.get(user=user)
-        return redirect('trainer_home')
-    except:
-        pass
-    d = {'error': error, 'data': data}
-    return render(request, 'carousel.html', d)
-
-
-def Home(request):
     result = ''
     data = 0
     user = ''
@@ -79,7 +55,7 @@ def LoginUser(request):
             d = {'result': result}
             return render(request, 'login.html', d)
         d = {'result': result, 'isLogin': True}
-        return render(request, 'homepage.html', d)
+        return redirect('home')
 
 
 def Register(request):
@@ -112,9 +88,185 @@ def Register(request):
             AuctionUser.objects.create(
                 membership=membership, user=user, contact=contact, address=address, dob=dob, image=image)
         d = {'result': 'register'}
-        return render(request, 'login.html',  d)
+        return redirect('loginUser')
 
 
 def Logout(request):
     logout(request)
     return redirect('home')
+
+
+# def new():
+#     status = Status.objects.get(status="pending")
+#     new_pro = Product.objects.filter(status=status)
+#     return new_pro
+
+
+def ProfileUser(request):
+    if not request.user.is_authenticated:
+        return redirect('loginUser')
+    data = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+        return render(request, 'profileUser.html', d)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+        return render(request, 'profileUser.html', d)
+
+
+def EditProfileUser(request):
+    if not request.user.is_authenticated:
+        return redirect('loginUser')
+    user = ''
+    data = ''
+    try:
+        user = User.objects.get(username=request.user.username)
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+    except:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+
+    if request.method == "GET":
+        return render(request, 'editProfile.html', d)
+    if request.method == "POST":
+        first_name = request.POST['firstname']
+        last_name = request.POST['lastname']
+
+        contact = request.POST['contact']
+        address = request.POST['address']
+
+        try:
+            data.image = request.FILES['image']
+            data.save()
+        except:
+            pass
+        user.first_name = first_name
+        user.last_name = last_name
+        data.address = address
+        data.contact = contact
+
+        user.save()
+        data.save()
+
+        d = {'result': "editprofile", 'data': data}
+        return render(request, 'profileUser.html', d)
+
+
+def ChangePassword(request):
+    if not request.user.is_authenticated:
+        return redirect('loginUser')
+    user = ''
+    data = ''
+    try:
+        user = User.objects.get(username=request.user.username)
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+    except:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+
+    if request.method == "GET":
+        return render(request, 'editPassword.html', d)
+    if request.method == "POST":
+        pw1 = request.POST['pw1']
+        pw2 = request.POST['pw2']
+        pw3 = request.POST['pw3']
+        if (pw2 == pw3):
+            u = User.objects.get(username__exact=request.user.username)
+            u.set_password(pw2)
+            u.save()
+            d = {'result': "changepassword", 'data': data}
+            return render(request, 'login.html', d)
+        else:
+            d = {'result': "passnot", 'data': data}
+            return render(request, 'editPassword.html', d)
+
+
+def ManagerWallet(request):
+    if not request.user.is_authenticated:
+        return redirect('loginUser')
+    data = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+    log = ''
+    log = MemberFeeLog.objects.filter(user=user).order_by('-created_at')
+    try:
+        print("----------------------------------")
+        print(log)
+
+        d = {'data': data, 'log': log}
+    except:
+        pass
+    return render(request, 'managerwallet.html', d)
+
+
+def AddMoneyToWallet(request):
+    if not request.user.is_authenticated:
+        return redirect('loginUser')
+    data = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data}
+    if request.method == "GET":
+        return render(request, 'addmoneytowallet.html', d)
+    if request.method == "POST":
+        mem = MemberFee.objects.get(fee="Paid")
+        data.membership = mem
+        data.allMoney += 10000
+        data.save()
+
+        MemberFeeLog.objects.create(
+            user=user, nameLog="Add money", status="0", money=10000)
+
+        return redirect('wallet')
