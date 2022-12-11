@@ -117,6 +117,11 @@
                         <ul class="dropdown-menu dropdown-menu-start">
                             <li><a class="nav-item dropdown-item" type="button" href="{% url 'wallet' %}">Wallet</a>
                             </li>
+                            {% if request.user.is_staff %}
+                            <li><a class="nav-item dropdown-item" type="button" href="{% url 'adminHome' %}">Admin
+                                    Page</a>
+                            </li>
+                            {% endif %}
                             <li><a class="nav-item dropdown-item" type="button"
                                     href="{% url 'profileUser' %}">Profile</a></li>
                             <li><a class="nav-item dropdown-item" type="button" href="{% url 'changePassword' %}">Change
@@ -130,10 +135,11 @@
                     {% endif %}
                     {% else %}
                     <li class="nav-item me-3 me-lg-1 fw-bold">
-                        <a type="nav-link" class="btn btn-purpulgrdiant" href="/login">Login</a>
+                        <a type="nav-link" class="btn btn-purpulgrdiant" href="{% url 'loginUser' %}">Login</a>
                     </li>
                     <li class="nav-item me-3 me-lg-1 fw-bold">
-                        <a type="nav-link" class="btn btn-outline-purpulgrdiant " href="/register">Register</a>
+                        <a type="nav-link" class="btn btn-outline-purpulgrdiant "
+                            href="{% url 'registerUser' %}">Register</a>
                     </li>
                     {% endif %}
                 </ul>

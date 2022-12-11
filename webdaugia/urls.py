@@ -31,8 +31,40 @@ urlpatterns = [
     path('editrofileuser/', EditProfileUser, name="editProfileUser"),
     path('changepassword', ChangePassword, name="changePassword"),
 
+    # /////////////////////////////////
+
     path('managerwallet', ManagerWallet, name="wallet"),
     path('addmoneytowallet', AddMoneyToWallet, name='addMoneyToWallet'),
+
+    # /////////////////////////////////
+
+    path('dashboard', AdminHome, name="adminHome"),
+
+    path('adminaddsectiondate', AdminAddSeactionDate, name="adminaddsectiondate"),
+    path('adminviewsectiondate', AdminViewSeactionDate,
+         name="adminviewsectiondate"),
+
+    path('adminaddsectiontime', AdminAddSeactionTime, name="adminaddsectiontime"),
+    path('adminviewsectiontime', AdminViewSeactionTime,
+         name="adminviewsectiontime"),
+
+    path('adminaddcategory', AdminAddCategory, name="adminaddcategory"),
+    path('adminviewcategory', AdminViewCategory, name="adminviewcategory"),
+
+    path('adminaddsubcategory', AdminAddSubcategory, name="adminaddsubcategory"),
+    path('adminviewsubcategory', AdminViewSubcategory,
+         name="adminviewsubcategory"),
+
+    path('adminaddproducionverification', AdminAddProducionVerification, name="adminaddproducionverification"),
+    path('adminviewproducionverification', AdminViewProducionVerification, name="adminviewproducionverification"),
+
+    path('adminbidderuser', AdminBidderUserManager, name="adminbidderuser"),
+    path('adminselleruser', AdminSellerUserManager, name="adminselleruser"),
+
+    path('adminresult', AdminResult, name="adminresult"),
+    path('adminfeedBack', AdminFeedBack, name="adminfeedBack"),
+
+    # /////////////////////////////////
 
     path('', Home, name="viewAuction"),
     path('', Home, name="biddingStatus"),

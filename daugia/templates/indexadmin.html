@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    {% block title %}
+    <!-- <title>Document</title> -->
+    {% endblock %}
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{% static 'assets/img/cnsc.png' %}" rel="icon">
+    <link href="{% static 'assets/img/logo.png' %}" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link
+        href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.snow.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/quill/quill.bubble.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/remixicon/remixicon.css' %}" rel="stylesheet">
+    <link href="{% static 'assets/vendor/simple-datatables/style.css' %}" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="{% static 'assets/css/style.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+
+        <div class="d-flex align-items-center justify-content-between">
+            <a href="{% url 'adminHome' %}" class="logo d-flex align-items-center">
+                <span class="d-none d-lg-block">AUCTIONMK ADMIN</span>
+            </a>
+            <i class="bi bi-list toggle-sidebar-btn"></i>
+        </div><!-- End Logo -->
+
+        <div class="search-bar">
+            <form class="search-form d-flex align-items-center" method="POTS" action="">
+                <input type="text" name="query" placeholder="Search" title="Enter search keyword">
+                <button type="submit" title="Search"><i class="bi bi-search"></i></button>
+            </form>
+        </div><!-- End Search Bar -->
+
+        <nav class="header-nav ms-auto">
+            <ul class="d-flex align-items-center">
+
+                <li class="nav-item d-block d-lg-none">
+                    <a class="nav-link nav-icon search-bar-toggle " href="/">
+                        <i class="bi bi-search"></i>
+                    </a>
+                </li><!-- End Search Icon-->
+
+
+
+                <li class="nav-item dropdown pe-3">
+                    <div class="btn-group shadow-0 text-white">
+                        <a class="d-block text-decoration-none dropdown-toggle nav-link text-success"
+                            data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer">
+                            Welcome {{request.user.first_name}}
+
+                            <img src="{{data.image.url}}" alt="mdo" width="32" height="32" class="rounded-circle ms-1">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-start">
+                            <li><a class="nav-item dropdown-item" type="button" href="{% url 'home' %}">Back home</a>
+                            </li>
+                            <li><a class="nav-item dropdown-item" href="{% url 'logout' %}">Logout</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                </li><!-- End Profile Nav -->
+
+            </ul>
+        </nav><!-- End Icons Navigation -->
+
+    </header><!-- End Header -->
+
+    <!-- ======= Sidebar ======= -->
+    <aside id="sidebar" class="sidebar">
+        <ul class="sidebar-nav" id="sidebar-nav">
+            <li class="nav-item">
+                <a class="nav-link {% block dashboard %}text-dark{% endblock %}" href="{% url 'adminHome' %}">
+                    <i class="bi bi-grid"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+
+            <li class="nav-heading">Time</li>
+            <li class="nav-item">
+                <a class="nav-link  {% block sectiondate %}collapsed{% endblock %}" data-bs-target="#tables-nav"
+                    data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-layout-text-window-reverse"></i><span>Sesstion Date</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="tables-nav" class="nav-content collapse {% block sectiondateshow %}{% endblock %}"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class=" {% block adminaddsectiondate %}{% endblock %}"
+                            href="{% url 'adminaddsectiondate' %}">
+                            <i class="bi bi-circle"></i><span>Add section date</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class=" {% block adminviewsectiondate %}{% endblock %}"
+                            href="{% url 'adminviewsectiondate' %}">
+                            <i class="bi bi-circle"></i><span>View section date</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Tables Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link {% block sectiontime %}collapsed{% endblock %}" data-bs-target="#charts-nav"
+                    data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-bar-chart"></i><span>Section time</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="charts-nav" class="nav-content collapse {% block sectiontimeshow %}{% endblock %}"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class=" {% block adminaddsectiontime %}{% endblock %}"
+                            href="{% url 'adminaddsectiontime' %}">
+                            <i class="bi bi-circle"></i><span>Add section time</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class=" {% block adminviewsectiontime %}{% endblock %}"
+                            href="{% url 'adminviewsectiontime' %}">
+                            <i class="bi bi-circle"></i><span>View section time</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Charts Nav -->
+
+
+
+            <li class="nav-heading">Product</li>
+            <li class="nav-item">
+                <a class="nav-link {% block category %}collapsed{% endblock %}" data-bs-target="#components-nav"
+                    data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-menu-button-wide"></i><span>Category</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="components-nav" class="nav-content collapse {% block categoryshow %}{% endblock %}"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class=" {% block adminaddcategory %}{% endblock %}" href="{% url 'adminaddcategory' %}">
+                            <i class="bi bi-circle"></i><span>Add category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class=" {% block adminviewcategory %}{% endblock %}" href="{% url 'adminviewcategory' %}">
+                            <i class="bi bi-circle"></i><span>View category</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Components Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link {% block subcategory %}collapsed{% endblock %}" data-bs-target="#forms-nav"
+                    data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-journal-text"></i><span>Sub-category</span><i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="forms-nav" class="nav-content collapse {% block subcategoryshow %}{% endblock %}"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class=" {% block adminaddsubcategory %}{% endblock %}"
+                            href="{% url 'adminaddsubcategory' %}">
+                            <i class="bi bi-circle"></i><span>Add Sub-category</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class=" {% block adminviewsubcategory %}{% endblock %}"
+                            href="{% url 'adminviewsubcategory' %}">
+                            <i class="bi bi-circle"></i><span>View Sub-category</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Forms Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link {% block producionverification %}collapsed{% endblock %}" data-bs-target="#icons-nav"
+                    data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-gem"></i><span>Product verification</span> <i
+                        class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="icons-nav" class="nav-content collapse {% block producionverificationshow %}{% endblock %}"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class=" {% block adminaddproducionverification %}{% endblock %}"
+                            href="{% url 'adminaddproducionverification' %}">
+                            <i class="bi bi-circle"></i><span>New product</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class=" {% block adminviewproducionverification %}{% endblock %}"
+                            href="{% url 'adminviewproducionverification' %}">
+                            <i class="bi bi-circle"></i><span>View all prodcution</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Icons Nav -->
+            <li class="nav-heading">Customer</li>
+            <li class="nav-item">
+                <a class="nav-link {% block bidderuser %}collapsed{% endblock %}" data-bs-target="#users-nav"
+                    data-bs-toggle="collapse" href="#">
+                    <i class="bi bi-person"></i><span>User</span><i class="bi bi-chevron-down ms-auto"></i>
+                </a>
+                <ul id="users-nav" class="nav-content collapse {% block bidderusershow %}{% endblock %}"
+                    data-bs-parent="#sidebar-nav">
+                    <li>
+                        <a class=" {% block adminbidderuser %}{% endblock %}" href="{% url 'adminbidderuser' %}">
+                            <i class="bi bi-circle"></i><span>Bidder user</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class=" {% block adminselleruser %}{% endblock %}" href="{% url 'adminselleruser' %}">
+                            <i class="bi bi-circle"></i><span>Seller user</span>
+                        </a>
+                    </li>
+                </ul>
+            </li><!-- End Icons Nav -->
+            <li class="nav-item">
+                <a class="nav-link {% block result %}collapsed{% endblock %}" href="{% url 'adminresult' %}">
+                    <i class="bi bi-envelope"></i>
+                    <span>Result</span>
+                </a>
+            </li><!-- End Contact Page Nav -->
+
+            <li class="nav-item">
+                <a class="nav-link {% block feedback %}collapsed{% endblock %}" href="{% url 'adminfeedBack' %}">
+                    <i class="bi bi-question-circle"></i>
+                    <span>FeedBack</span>
+                </a>
+            </li><!-- End F.A.Q Page Nav -->
+
+
+
+
+        </ul>
+
+    </aside><!-- End Sidebar-->
+    <main id="main" class="main">
+
+        <div class="pagetitle">
+            <h1>{% block titleh1 %} {% endblock %}</h1>
+            <nav>
+                <ol class="breadcrumb">
+                    {% block breadcrumb %}
+                    {% endblock %}
+                </ol>
+            </nav>
+        </div><!-- End Page Title -->
+        {% block body %}
+
+        {% endblock %}
+
+    </main><!-- End indexmain -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer">
+        <div class="copyright">
+            &copy; Copyright <strong><span>AUCTIONMK</span></strong>. All Rights Reserved
+        </div>
+    </footer><!-- End Footer -->
+
+    <a href="/" class="back-to-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
+
+    <!-- Vendor JS Files -->
+    <script src="{% static 'assets/vendor/apexcharts/apexcharts.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/quill/quill.min.js' %}"></script>
+    <script src="{% static 'assets/vendor/simple-datatables/simple-datatables.js' %}"></script>
+    <script src="{% static 'assets/vendor/tinymce/tinymce.min.js' %}"></script>
+
+    <!-- Template Main JS File -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+</body>
+
+</html>

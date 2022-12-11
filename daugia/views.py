@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate, login, logout
 
+# ///////////////// homepage
+
 
 def Home(request):
     result = ''
@@ -111,17 +113,21 @@ def ProfileUser(request):
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
         return render(request, 'profileUser.html', d)
     else:
         user = User.objects.get(id=request.user.id)
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
         return render(request, 'profileUser.html', d)
 
 
@@ -134,16 +140,20 @@ def EditProfileUser(request):
         user = User.objects.get(username=request.user.username)
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
     except:
         user = User.objects.get(id=request.user.id)
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
 
     if request.method == "GET":
         return render(request, 'editProfile.html', d)
@@ -180,16 +190,20 @@ def ChangePassword(request):
         user = User.objects.get(username=request.user.username)
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
     except:
         user = User.objects.get(id=request.user.id)
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
 
     if request.method == "GET":
         return render(request, 'editPassword.html', d)
@@ -217,16 +231,20 @@ def ManagerWallet(request):
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
     else:
         user = User.objects.get(id=request.user.id)
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
     log = ''
     log = MemberFeeLog.objects.filter(user=user).order_by('-created_at')
     try:
@@ -248,16 +266,20 @@ def AddMoneyToWallet(request):
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
     else:
         user = User.objects.get(id=request.user.id)
         try:
             data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data}
+        d = {'data': data, 'result': result}
     if request.method == "GET":
         return render(request, 'addmoneytowallet.html', d)
     if request.method == "POST":
@@ -270,3 +292,369 @@ def AddMoneyToWallet(request):
             user=user, nameLog="Add money", status="0", money=10000)
 
         return redirect('wallet')
+
+
+# ///////////////// homepage
+
+
+# ///////////////// admin
+
+def AdminHome(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'dashboardadminpage.html', d)
+
+
+def AdminAddSeactionDate(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'addsectiondate.html', d)
+
+
+def AdminViewSeactionDate(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'viewsectiondate.html', d)
+
+
+def AdminAddSeactionTime(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'addsectiontime.html', d)
+
+
+def AdminViewSeactionTime(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'viewsectiontime.html', d)
+
+
+def AdminAddCategory(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'addcategory.html', d)
+
+
+def AdminViewCategory(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'viewcategory.html', d)
+
+
+def AdminAddSubcategory(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'addsubcategory.html', d)
+
+
+def AdminViewSubcategory(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'viewsubcategory.html', d)
+
+
+def AdminAddProducionVerification(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'addproducionverification.html', d)
+
+
+def AdminViewProducionVerification(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'viewproducionverification.html', d)
+
+
+def AdminBidderUserManager(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'bidderuser.html', d)
+
+
+def AdminSellerUserManager(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'selleruser.html', d)
+
+
+def AdminResult(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'result.html', d)
+
+
+def AdminFeedBack(request):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    return render(request, 'feedBack.html', d)
+    # ///////////////// admin
