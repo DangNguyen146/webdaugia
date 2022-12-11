@@ -49,13 +49,26 @@ urlpatterns = [
          name="adminviewsectiondate"),
 
     path('adminaddsectiontime', AdminAddSeactionTime, name="adminaddsectiontime"),
+    path('editsessiontime(<int:pid>)',
+         EditSessionTime, name='editsessiontime'),
+    path('deletesessiontime(<int:pid>)',
+         DeletesessionTime, name='deletesessiontime'),
     path('adminviewsectiontime', AdminViewSeactionTime,
          name="adminviewsectiontime"),
 
+
+
     path('adminaddcategory', AdminAddCategory, name="adminaddcategory"),
+    path('editcategory(<int:pid>)', EditCategory, name='editcategory'),
+    path('deletecategory(<int:pid>)', DeleteCategory, name='deletecategory'),
     path('adminviewcategory', AdminViewCategory, name="adminviewcategory"),
 
+
     path('adminaddsubcategory', AdminAddSubcategory, name="adminaddsubcategory"),
+    path('editsubcategory(<int:pid>)',
+         EditSubCategory, name='editsubcategory'),
+    path('deletesubcategory(<int:pid>)',
+         DeleteSubCategory, name='deletesubcategory'),
     path('adminviewsubcategory', AdminViewSubcategory,
          name="adminviewsubcategory"),
 
@@ -71,6 +84,11 @@ urlpatterns = [
     path('adminfeedBack', AdminFeedBack, name="adminfeedBack"),
 
     # /////////////////////////////////
+
+
+    # /////////////////////////////////
+
+
 
     path('', Home, name="viewAuction"),
     path('', Home, name="biddingStatus"),

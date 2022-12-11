@@ -464,7 +464,15 @@ def AdminAddSeactionTime(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    sed = SessionDate.objects.all()
+
+    if request.method == 'POST':
+        d = request.POST['date']
+        t = request.POST['time']
+        d1 = SessionDate.objects.get(date=d)
+        SessionTime.objects.create(date=d1, time=t)
+        return redirect('adminviewsectiontime')
+    d = {'data': data, 'result': result, 'sed': sed}
     return render(request, 'addsectiontime.html', d)
 
 
@@ -488,8 +496,52 @@ def AdminViewSeactionTime(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    cat = SessionTime.objects.all()
+    d = {'data': data, 'result': result, 'time1': cat}
     return render(request, 'viewsectiontime.html', d)
+
+
+def DeletesessionTime(request, pid):
+    cat = SessionTime.objects.get(id=pid)
+    cat.delete()
+    return redirect('adminviewsectiontime')
+
+
+def EditSessionTime(request, pid):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+
+    sed = SessionDate.objects.all()
+    sett = SessionTime.objects.get(id=pid)
+
+    if request.method == 'POST':
+        d = request.POST['date']
+        t = request.POST['time']
+        sedd = SessionDate.objects.get(id=d)
+        sett.date = sedd
+        sett.time = t
+        sett.save()
+        return redirect('adminviewsectiontime')
+
+    d = {'data': data, 'result': result, 'sed': sed, 'sett': sett}
+    return render(request, 'editsectiontime.html', d)
 
 
 def AdminAddCategory(request):
@@ -512,8 +564,49 @@ def AdminAddCategory(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    if request.method == 'POST':
+        n = request.POST['cat']
+        Category.objects.create(name=n)
+        return redirect('adminviewcategory')
+    d = {'data': data, 'result': result}
     return render(request, 'addcategory.html', d)
+
+
+def EditCategory(request, pid):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    cat = Category.objects.get(id=pid)
+    if request.method == 'POST':
+        n = request.POST['cat']
+        cat.name = n
+        cat.save()
+        return redirect('adminviewcategory')
+
+    d = {'data': data, 'result': result, 'cat': cat}
+    return render(request, 'editcategory.html', d)
+
+
+def DeleteCategory(request, pid):
+    cat = Category.objects.get(id=pid)
+    cat.delete()
+    return redirect('adminviewcategory')
 
 
 def AdminViewCategory(request):
@@ -536,7 +629,8 @@ def AdminViewCategory(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    cat = Category.objects.all()
+    d = {'data': data, 'result': result, 'cat': cat}
     return render(request, 'viewcategory.html', d)
 
 
@@ -560,8 +654,54 @@ def AdminAddSubcategory(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    cat = Category.objects.all()
+    if request.method == 'POST':
+        n = request.POST['cat']
+        s = request.POST['scat']
+        cat1 = Category.objects.get(name=n)
+        SubCategory.objects.create(name=s, category=cat1)
+        return redirect('adminviewsubcategory')
+    d = {'data': data, 'result': result, 'cat': cat}
     return render(request, 'addsubcategory.html', d)
+
+
+def EditSubCategory(request, pid):
+    if not request.user.is_staff:
+        return redirect('home')
+    user = User.objects.get(username=request.user.username)
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+        d = {'data': data, 'result': result}
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    cat = Category.objects.all()
+    subcat = SubCategory.objects.get(id=pid)
+    if request.method == 'POST':
+        n = request.POST['cat']
+        s = request.POST['scat']
+        subcat.category = Category.objects.get(name=n)
+        subcat.name = s
+        subcat.save()
+        return redirect('adminviewsubcategory')
+    d = {'data': data, 'result': result, 'cat': cat, 'subcat': subcat}
+    return render(request, 'editsubcategory.html', d)
+
+
+def DeleteSubCategory(request, pid):
+    cat = SubCategory.objects.get(id=pid)
+    cat.delete()
+    return redirect('adminviewsubcategory')
 
 
 def AdminViewSubcategory(request):
@@ -584,7 +724,8 @@ def AdminViewSubcategory(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    cat = SubCategory.objects.all()
+    d = {'data': data, 'result': result, 'cat': cat}
     return render(request, 'viewsubcategory.html', d)
 
 
@@ -656,7 +797,8 @@ def AdminBidderUserManager(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    prod = BidderUser.objects.all()
+    d = {'data': data, 'result': result, 'prod': prod}
     return render(request, 'bidderuser.html', d)
 
 
@@ -680,7 +822,8 @@ def AdminSellerUserManager(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    prod = AuctionUser.objects.all()
+    d = {'data': data, 'result': result, 'prod': prod}
     return render(request, 'selleruser.html', d)
 
 

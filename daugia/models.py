@@ -80,7 +80,7 @@ class SessionDate(models.Model):
         return self.date
 
 
-class Session_Time(models.Model):
+class SessionTime(models.Model):
     date = models.ForeignKey(SessionDate, on_delete=models.CASCADE, null=True)
     time = models.CharField(max_length=30, null=True)
 
@@ -102,7 +102,7 @@ class Product(models.Model):
     min_price = models.IntegerField(null=True)
     images = models.FileField(null=True)
     session = models.ForeignKey(
-        Session_Time, on_delete=models.CASCADE, null=True)
+        SessionTime, on_delete=models.CASCADE, null=True)
     category = models.ForeignKey(
         SubCategory, on_delete=models.CASCADE, null=True)
 

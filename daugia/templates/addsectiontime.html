@@ -30,6 +30,40 @@ show
 {% block body %}
 <section class="section dashboard">
     <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add section time</h5>
+                    <form method="post" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="row mb-3">
+                            <label class="col-sm-2 col-form-label">Select</label>
+                            <div class="col-sm-10">
+                                <select class="form-select" aria-label=">Select Session Date" name="date">
+
+                                    {% for i in sed %}
+                                    <option value="{{i.date}}">{{i.date}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="inputTime" class="col-sm-2 col-form-label">Time</label>
+                            <div class="col-sm-10">
+                                <input type="time" name="time" class="form-control">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+
+                            <div class="col-sm-10">
+                                <button type="submit" class="btn btn-primary">Submit Form</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
 {% endblock %}

@@ -40,7 +40,11 @@ show
                             <div class="col-sm-10">
                                 <select class="form-select" aria-label=">Select Session category" name="cat">
                                     {% for i in cat %}
+                                    {% if subcat.category.nam == i.name %}
+                                    <option value="{{i.name}}" selected>{{i.name}}</option>
+                                    {% else %}
                                     <option value="{{i.name}}">{{i.name}}</option>
+                                    {% endif %}
                                     {% endfor %}
                                 </select>
                             </div>
@@ -49,7 +53,7 @@ show
                         <div class="row mb-3">
                             <label for="inputTime" class="col-sm-2 col-form-label">SubCategory Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="scat" class="form-control">
+                                <input type="text" name="scat" value="{{subcat.name}}" class="form-control">
                             </div>
                         </div>
                         <div class="row mb-3">
