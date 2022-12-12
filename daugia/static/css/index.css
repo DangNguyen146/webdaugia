@@ -12,7 +12,16 @@ body {
 }
 
 input {
-    color: rgb(255, 225, 0) !important;
+    color: #fff !important;
+}
+
+select {
+    color: #fff !important;
+    background-color: transparent !important;
+}
+
+select option {
+    background-color: #202020 !important;
 }
 
 body::before {
@@ -231,7 +240,7 @@ body .footer2 {
 }
 
 .form-outline .form-control~.form-label {
-    color: rgba(155, 81, 224, 0.7) !important;
+    color: rgb(239, 239, 239) !important;
 }
 
 .box .display {

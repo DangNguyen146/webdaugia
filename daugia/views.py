@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 from django.contrib.auth import authenticate, login, logout
 
+
+import datetime
 # ///////////////// homepage
 
 
@@ -730,9 +732,12 @@ def AdminViewSubcategory(request):
 
 
 def AdminAddProducionVerification(request):
-    if not request.user.is_staff:
-        return redirect('home')
+    if not request.user.is_authenticated:
+        return redirect('loginUser')
+    data = ''
+    result = ''
     user = User.objects.get(username=request.user.username)
+
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -740,7 +745,6 @@ def AdminAddProducionVerification(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
     else:
         user = User.objects.get(id=request.user.id)
         try:
@@ -749,7 +753,8 @@ def AdminAddProducionVerification(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    prod = AuctedProduct.objects.all()
+    d = {'data': data, 'result': result, 'prod': prod}
     return render(request, 'addproducionverification.html', d)
 
 
@@ -773,7 +778,9 @@ def AdminViewProducionVerification(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+
+    prod = AuctedProduct.objects.all()
+    d = {'data': data, 'result': result, 'prod': prod}
     return render(request, 'viewproducionverification.html', d)
 
 
@@ -873,4 +880,146 @@ def AdminFeedBack(request):
             data = AuctionUser.objects.get(user=user)
         d = {'data': data, 'result': result}
     return render(request, 'feedBack.html', d)
-    # ///////////////// admin
+
+# ///////////////// admin
+
+
+# ///////////////////// product
+def LoadCourses(request):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    programming_id = request.GET.get('programming')
+    # programming_id1 = request.GET.get('programming1')
+    # print(programming_id,11111111111111111,programming_id1)
+    courses = SubCategory.objects.filter(
+        category_id=programming_id).order_by('name')
+    # courses1 = Session_Time.objects.filter(date_id=programming_id1).order_by('name')
+    return render(request, 'courses_dropdown_list_options.html', {'courses': courses})
+
+
+def LoadCourses1(request):
+    if not request.user.is_authenticated:
+        return redirect('login_user')
+    programming_id = request.GET.get('programming')
+    courses = SessionTime.objects.filter(date_id=programming_id)
+    return render(request, 'courses_dropdown_list_options1.html', {'courses': courses})
+
+
+def AddProduct(request):
+    if not request.user.is_authenticated:
+        return redirect('loginUser')
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    cat = Category.objects.all()
+    scat = SubCategory.objects.all()
+    sell = AuctionUser.objects.get(user=user)
+    date1 = datetime.date.today()
+    sed = SessionDate.objects.all()
+    sett = SessionTime.objects.all()
+    if request.method == "POST":
+        c = request.POST['cat']
+        s = request.POST['scat']
+        p = request.POST['p_name']
+        pr = request.POST['price']
+        i = request.FILES['image']
+        sett1 = request.POST['time']
+        sed1 = request.POST['date']
+        timelive = request.POST['timelive']
+        sub = SubCategory.objects.get(id=s)
+        ses = SessionTime.objects.get(id=sett1)
+        sta = Status.objects.get(status="Pending")
+        pro1 = Product.objects.create(
+            status=sta, session=ses, category=sub, name=p, min_price=pr, images=i)
+        auc = AuctedProduct.objects.create(
+            product=pro1, user=sell, timelive=timelive)
+        return redirect('home')
+    d = {'data': data, 'result': result, 'sed': sed, 'sett': sett, 'cat': cat, 'scat': scat,
+         'date1': date1}
+    return render(request, 'addproduct.html', d)
+
+
+def ProductDetail2(request, pid):
+    if not request.user.is_authenticated:
+        return redirect('loginUser')
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    pro = Product.objects.get(id=pid)
+    prod = AuctedProduct.objects.all()
+    end = pro.session.time.split(':')
+
+    if end[0] == "23":
+        end1 = "00"
+    else:
+        end1 = str(int(end[0]) + 1)
+    end2 = end1 + ":" + end[1]
+
+    d = {'data': data, 'result': result, 'prod': prod, 'pro': pro, 'end2': end2}
+    return render(request, 'productdetail2.html', d)
+
+
+def ChangeStatus(request, pid):
+    if not request.user.is_authenticated:
+        return redirect('loginUser')
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+
+    pro1 = Product.objects.get(id=pid)
+    if request.method == "POST":
+        stat = request.POST['stat']
+        sta = Status.objects.get(status=stat)
+        pro1.status = sta
+        pro1.save()
+        return redirect('adminaddproducionverification')
+    d = {'pro': pro1,  'result': result, 'data': data, }
+    return render(request, 'status.html', d)

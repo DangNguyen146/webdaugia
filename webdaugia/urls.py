@@ -84,6 +84,11 @@ urlpatterns = [
     path('adminfeedBack', AdminFeedBack, name="adminfeedBack"),
 
     # /////////////////////////////////
+    path('addproduct', AddProduct, name="addProduct"),
+    path('loadcourses/', LoadCourses, name='ajaxloadcourses'),
+    path('loadcourses1/', LoadCourses1, name='ajaxloadcourses1'),
+    path('productdetail2(<int:pid>)', ProductDetail2, name='productdetail2'),
+    path('status(<int:pid>)', ChangeStatus, name='status'),
 
 
     # /////////////////////////////////
@@ -92,7 +97,6 @@ urlpatterns = [
 
     path('', Home, name="viewAuction"),
     path('', Home, name="biddingStatus"),
-    path('', Home, name="addProduct"),
     path('', Home, name="allProduct"),
     path('', Home, name="biddingStatus2"),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
