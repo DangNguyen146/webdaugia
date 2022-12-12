@@ -38,7 +38,7 @@
                                 {% if i.product.status.status == 'Done' %}
                                 <td>{{i.winner}}</td>
                                 {% else %}
-                                <td style="color:green">NotStarted/NotProperBid</td>
+                                <td class="fw-bold text-warning">{{i.winner}}</td>
                                 {% endif %}
                             </tr>
                             {% endfor %}

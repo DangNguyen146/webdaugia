@@ -111,17 +111,8 @@ class Product(models.Model):
 
 
 class AuctedProduct(models.Model):
-    winner = models.CharField(max_length=100, null=True)
-    user = models.ForeignKey(AuctionUser, on_delete=models.CASCADE, null=True)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
-    timelive = models.IntegerField(null=True, default=1)
-
-    def __str__(self):
-        return self.user.user.username + " " + self.product.name
-
-
-class AuctedProduct(models.Model):
-    winner = models.CharField(max_length=100, null=True)
+    winner = models.CharField(
+        max_length=100, null=True, default="NotStarted/NotProperBid")
     user = models.ForeignKey(AuctionUser, on_delete=models.CASCADE, null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
 

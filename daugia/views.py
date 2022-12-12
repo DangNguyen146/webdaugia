@@ -1123,6 +1123,7 @@ def ParticipatedUser(request, pid):
 
     auc = AuctedProduct.objects.get(id=pid)
     pro1 = Participant.objects.filter(aucted_product=auc)
+    message1 = ''
     if not pro1:
         message1 = "No Bidder"
     d = {'data': data,  'result': result,
@@ -1449,19 +1450,29 @@ def winner1(request, pid):
     if data.membership.fee == "Unpaid":
         return redirect('wallet')
 
-    # pro2 = Product.objects.get(id=pid)
-    # au = AuctedProduct.objects.get(product=pro2)
-    # re = Result.objects.get(result="Winner")
-    # pro1 = ""
-    # try:
-    #     pro1 = Participant.objects.get(aucted_product=au, result=re)
-    # except:
-    #     pass
-
     pro2 = Product.objects.get(id=pid)
     au = AuctedProduct.objects.get(product=pro2)
     re = Result.objects.get(result="Winner")
-    pro1 = Participant.objects.get(aucted_product=au, result=re)
+    pro1 = ""
+    try:
+        pro1 = Participant.objects.get(aucted_product=au, result=re)
+    except:
+        pro1 = Participant.objects.get(aucted_product=au)
+        pro1.payment = Payment.objects.get(id=2)
+        pro1.result = Result.objects.get(id=1)
+        pro1.result = Result.objects.get(id=1)
+        pro1.save()
+        au.winner = request.user.username
+        au.save()
+        try:
+            pro1 = Participant.objects.get(aucted_product=au, result=re)
+            data.allMoney -= pro1.new_price
+            data.save()
+            MemberFeeLog.objects.create(
+                user=user, nameLog="Pay"+pro1.product.name, status="1", money=pro1.new_price)
+        except:
+            pass
+    
 
     d = {'data': data,  'result': result, 'pro': pro2, 'pro1': pro1}
     return render(request, 'winner1.html', d)
