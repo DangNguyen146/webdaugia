@@ -9,8 +9,6 @@
 
 {% block body %}
 
-
-
 <div class="main-container">
 
     <div class="content-wrapper">
@@ -27,6 +25,11 @@
         <div class="content-section">
             <div class="content-section-title">History</div>
             <ul>
+                {% if Unpaid == "Unpaid" %}
+                <li class="adobe-product">
+                    Please add money to continue
+                </li>
+                {% endif %}
                 {% for i in log %}
                 <li class="adobe-product">
                     <div class="products">

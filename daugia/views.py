@@ -110,6 +110,7 @@ def ProfileUser(request):
     if not request.user.is_authenticated:
         return redirect('loginUser')
     data = ''
+    result = ''
     user = User.objects.get(username=request.user.username)
 
     if (user):
@@ -119,8 +120,6 @@ def ProfileUser(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
-        return render(request, 'profileUser.html', d)
     else:
         user = User.objects.get(id=request.user.id)
         try:
@@ -129,8 +128,8 @@ def ProfileUser(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
-        return render(request, 'profileUser.html', d)
+    d = {'data': data, 'result': result}
+    return render(request, 'profileUser.html', d)
 
 
 def EditProfileUser(request):
@@ -138,6 +137,8 @@ def EditProfileUser(request):
         return redirect('loginUser')
     user = ''
     data = ''
+    result = ''
+    result = ''
     try:
         user = User.objects.get(username=request.user.username)
         try:
@@ -188,6 +189,7 @@ def ChangePassword(request):
         return redirect('loginUser')
     user = ''
     data = ''
+    result = ''
     try:
         user = User.objects.get(username=request.user.username)
         try:
@@ -229,6 +231,7 @@ def ManagerWallet(request):
         return redirect('loginUser')
     data = ''
     user = User.objects.get(username=request.user.username)
+    result = ''
 
     if (user):
         try:
@@ -246,16 +249,13 @@ def ManagerWallet(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-        d = {'data': data, 'result': result}
+    if data.membership.fee == "Unpaid":
+        d = {'data': data, 'result': result, 'Unpaid': 'Unpaid'}
+        return render(request, 'managerwallet.html', d)
     log = ''
     log = MemberFeeLog.objects.filter(user=user).order_by('-created_at')
-    try:
-        print("----------------------------------")
-        print(log)
 
-        d = {'data': data, 'log': log}
-    except:
-        pass
+    d = {'data': data, 'log': log}
     return render(request, 'managerwallet.html', d)
 
 
@@ -264,6 +264,7 @@ def AddMoneyToWallet(request):
         return redirect('loginUser')
     data = ''
     user = User.objects.get(username=request.user.username)
+    result = ''
 
     if (user):
         try:
@@ -908,6 +909,7 @@ def LoadCourses1(request):
 def AddProduct(request):
     if not request.user.is_authenticated:
         return redirect('loginUser')
+
     data = ''
     result = ''
     user = User.objects.get(username=request.user.username)
@@ -927,6 +929,9 @@ def AddProduct(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
+
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
     cat = Category.objects.all()
     scat = SubCategory.objects.all()
     sell = AuctionUser.objects.get(user=user)
@@ -1022,4 +1027,28 @@ def ChangeStatus(request, pid):
         pro1.save()
         return redirect('adminaddproducionverification')
     d = {'pro': pro1,  'result': result, 'data': data, }
+    return render(request, 'status.html', d)
+
+
+def AllProduct(request):
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    d = {'data': data,  'result': result}
     return render(request, 'status.html', d)

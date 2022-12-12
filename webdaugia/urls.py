@@ -92,11 +92,15 @@ urlpatterns = [
 
 
     # /////////////////////////////////
+    path('allproduct', AllProduct, name="allproduct"),
+
+
+
+    # /////////////////////////////////
 
 
 
     path('', Home, name="viewAuction"),
     path('', Home, name="biddingStatus"),
-    path('', Home, name="allProduct"),
     path('', Home, name="biddingStatus2"),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
