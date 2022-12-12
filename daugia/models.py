@@ -118,3 +118,45 @@ class AuctedProduct(models.Model):
 
     def __str__(self):
         return self.user.user.username + " " + self.product.name
+
+
+class AuctedProduct(models.Model):
+    winner = models.CharField(max_length=100, null=True)
+    user = models.ForeignKey(AuctionUser, on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+
+    def __str__(self):
+        return self.user.user.username + " " + self.product.name
+
+
+class Result(models.Model):
+    result = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return self.result
+
+
+class Payment(models.Model):
+    pay = models.CharField(max_length=100, null=True)
+
+    def __str__(self):
+        return self.pay
+
+
+class Participant(models.Model):
+    payment = models.ForeignKey(Payment, on_delete=models.CASCADE, null=True)
+    new_price = models.IntegerField(null=True)
+    result = models.ForeignKey(Result, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(BidderUser, on_delete=models.CASCADE, null=True)
+    aucted_product = models.ForeignKey(
+        AuctedProduct, on_delete=models.CASCADE, null=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True)
+
+
+class SendFeedback(models.Model):
+    profile = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+    message1 = models.TextField(null=True)
+    date = models.CharField(max_length=30, null=True)
+
+    def __str__(self):
+        return self.profile.username

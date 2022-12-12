@@ -1,0 +1,55 @@
+{% extends 'index.html' %}
+{% block title %}
+<title>Bidding Status page | Auction E-commerce</title>
+{% endblock %}
+{% block biddingstatusActive %}active{% endblock %}
+{% block biddingstatus %}selectedlink{% endblock %}
+
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-12 col-md-8">
+            <div class="box w-100 text-white">
+                <div class="displays p-5 w-100">
+                    <table class="table table-bordered text-light" id="myTable">
+                        <thead>
+                            <tr>
+                                <th>Sr. No</th>
+                                <th>Product Name</th>
+                                <th>Seller Name</th>
+                                <th>Session Date</th>
+                                <th>Session Time</th>
+                                <th>Status</th>
+                                <th>Winner</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            {% for i in pro %}
+                            <tr>
+                                <td>{{forloop.counter}}</td>
+                                <td>{{i.product.name}}</td>
+                                <td>{{i.user.user.username}}</td>
+                                <td>{{i.product.session.date.date}}</td>
+                                <td>{{i.product.session.time}}</td>
+                                <td>{{i.product.status.status}}</td>
+                                {% if i.product.status.status == 'Done' %}
+                                <td>{{i.winner}}</td>
+                                {% else %}
+                                <td style="color:green">NotStarted/NotProperBid</td>
+                                {% endif %}
+                            </tr>
+                            {% endfor %}
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+</div>
+
+{% endblock %}

@@ -54,16 +54,16 @@
 
                 <!-- Center elements -->
                 <ul class="navbar-nav">
-                    <li class="nav-item me-3 me-lg-1 fw-bold active">
+                    <li class="nav-item me-3 me-lg-1 fw-bold {% block HomeActive %}{% endblock %}">
                         <a class="nav-link" href="{% url 'home' %}">
-                            <span class="navlink {% block Home %} {% endblock %} s">Home</span>
+                            <span class="navlink {% block Home %} {% endblock %}">Home</span>
                         </a>
                     </li>
                     {% if request.user.username %}
                     {% if result == "bidder" %}
-                    <li class="nav-item me-3 me-lg-1 fw-bold">
-                        <a class="nav-link" href="{% url 'viewAuction' %}">
-                            <span class="navlink ">Auction</span>
+                    <li class="nav-item me-3 me-lg-1 fw-bold {% block auctionActive %}{% endblock %}">
+                        <a class="nav-link" href="{% url 'viewauction' %}">
+                            <span class="navlink {% block auction %} {% endblock %}">Auction</span>
                         </a>
                     </li>
                     <li class="nav-item me-3 me-lg-1 fw-bold">
@@ -72,19 +72,19 @@
                         </a>
                     </li>
                     {% else %}
-                    <li class="nav-item me-3 me-lg-1 fw-bold">
+                    <li class="nav-item me-3 me-lg-1 fw-bold {% block AddProductActive %}{% endblock %}">
                         <a class="nav-link" href="{% url 'addProduct' %}">
-                            <span class="navlink ">Add Product</span>
+                            <span class="navlink {% block AddProduct %}{% endblock %}">Add Product</span>
                         </a>
                     </li>
-                    <li class="nav-item me-3 me-lg-1 fw-bold">
+                    <li class="nav-item me-3 me-lg-1 fw-bold {% block AllproductActive %}{% endblock %}">
                         <a class="nav-link" href="{% url 'allproduct' %}">
-                            <span class="navlink ">All Product</span>
+                            <span class="navlink {% block Allproduct %}{% endblock %}">All Product</span>
                         </a>
                     </li>
-                    <li class="nav-item me-3 me-lg-1 fw-bold">
-                        <a class="nav-link" href="{% url 'biddingStatus2' %}">
-                            <span class="navlink ">Bidding Status</span>
+                    <li class="nav-item me-3 me-lg-1 fw-bold {% block biddingstatusActive %}{% endblock %}">
+                        <a class="nav-link" href="{% url 'biddingstatus2' %}">
+                            <span class="navlink {% block biddingstatus %}{% endblock %}">Bidding Status</span>
                         </a>
                     </li>
                     {% endif %}
@@ -280,8 +280,8 @@
 
             <!-- Copyright -->
             <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2)">
-                © 2020 Copyright:
-                <a class="text-white" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+                © 2022 Copyright:
+                <a class="text-white" href="https://AUCTIONMK/">AUCTIONMK</a>
             </div>
             <!-- Copyright -->
         </footer>

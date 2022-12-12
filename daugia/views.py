@@ -39,6 +39,7 @@ def Home(request):
 
 
 def LoginUser(request):
+    result = ''
     if request.method == "GET":
         return render(request, 'login.html')
     if request.method == "POST":
@@ -330,7 +331,7 @@ def AdminHome(request):
         all_b += 1
     for i in sel:
         all_s += 1
-
+    result = ''
     user = User.objects.get(username=request.user.username)
 
     if (user):
@@ -357,7 +358,8 @@ def AdminHome(request):
 def AdminAddSeactionDate(request):
     if not request.user.is_staff:
         return redirect('home')
-
+    result = ''
+    data = ''
     user = User.objects.get(username=request.user.username)
     if (user):
         try:
@@ -387,6 +389,8 @@ def AdminViewSeactionDate(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -413,6 +417,8 @@ def EditSessiondate(request, pid):
         return redirect('home')
 
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -451,6 +457,8 @@ def AdminAddSeactionTime(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -483,6 +491,8 @@ def AdminViewSeactionTime(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -514,6 +524,8 @@ def EditSessionTime(request, pid):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -551,6 +563,8 @@ def AdminAddCategory(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -579,6 +593,8 @@ def EditCategory(request, pid):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -616,6 +632,8 @@ def AdminViewCategory(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -641,6 +659,8 @@ def AdminAddSubcategory(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -672,6 +692,8 @@ def EditSubCategory(request, pid):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -711,6 +733,8 @@ def AdminViewSubcategory(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -763,6 +787,8 @@ def AdminViewProducionVerification(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -789,6 +815,8 @@ def AdminBidderUserManager(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -814,6 +842,8 @@ def AdminSellerUserManager(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -839,6 +869,8 @@ def AdminResult(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -863,6 +895,8 @@ def AdminFeedBack(request):
     if not request.user.is_staff:
         return redirect('home')
     user = User.objects.get(username=request.user.username)
+    result = ''
+    data = ''
     if (user):
         try:
             data = BidderUser.objects.get(user=user)
@@ -946,14 +980,14 @@ def AddProduct(request):
         i = request.FILES['image']
         sett1 = request.POST['time']
         sed1 = request.POST['date']
-        timelive = request.POST['timelive']
+
         sub = SubCategory.objects.get(id=s)
         ses = SessionTime.objects.get(id=sett1)
         sta = Status.objects.get(status="Pending")
         pro1 = Product.objects.create(
             status=sta, session=ses, category=sub, name=p, min_price=pr, images=i)
         auc = AuctedProduct.objects.create(
-            product=pro1, user=sell, timelive=timelive)
+            product=pro1, user=sell)
         return redirect('home')
     d = {'data': data, 'result': result, 'sed': sed, 'sett': sett, 'cat': cat, 'scat': scat,
          'date1': date1}
@@ -1050,5 +1084,384 @@ def AllProduct(request):
                 result = "bidder"
         except:
             data = AuctionUser.objects.get(user=user)
-    d = {'data': data,  'result': result}
-    return render(request, 'status.html', d)
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
+    pro = AuctedProduct.objects.filter(user=data)
+    d = {'data': data,  'result': result, 'pro': pro}
+    return render(request, 'allproduct.html', d)
+
+
+def ApiParticipateduser(request, pid):
+    auc = AuctedProduct.objects.get(id=pid)
+    pro1 = Participant.objects.filter(aucted_product=auc).count()
+    d = {'data': pro1, }
+    return render(request, 'apiauctionuserallproduct.html', {'data': pro1})
+
+
+def ParticipatedUser(request, pid):
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
+
+    auc = AuctedProduct.objects.get(id=pid)
+    pro1 = Participant.objects.filter(aucted_product=auc)
+    if not pro1:
+        message1 = "No Bidder"
+    d = {'data': data,  'result': result,
+         'pro1': pro1, 'message1': message1, 'auc': auc}
+    return render(request, 'participateduserproduct.html', d)
+
+
+def BiddingStatus2(request):
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
+
+    pro1 = AuctedProduct.objects.filter(user=data)
+    d = {'data': data,  'result': result, 'pro': pro1}
+
+    return render(request, 'bidding_status2.html', d)
+
+
+def ViewAuction(request):
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
+
+    terror = False
+    if request.method == "POST":
+        pro1 = Product.objects.get(id=pid)
+        auc = AuctedProduct.objects.get(product=pro1)
+        Participant.objects.create(user=data, aucted_product=auc)
+        terror = True
+    pid = 0
+    d1 = Participant.objects.filter(user=data)
+    li = []
+    for i in d1:
+        li.append(i.aucted_product.product.id)
+
+    status = Status.objects.get(status="Accept")
+    pro = Product.objects.filter(status=status)
+    pro1 = Product.objects.all()
+    message1 = ""
+    if not pro:
+        message1 = " No Any Bidding Product "
+    for i in pro:
+        if i.id in li:
+            i.temp = 1
+            i.save()
+        else:
+            i.temp = 0
+            i.save()
+    for i in pro:
+        a = i.session.date.date
+        li = a.split('-')
+        total_time = (int(li[0]) * 365) + (int(li[1]) * 30) + (int(li[2]))
+        d1 = datetime.date.today()
+        d2 = datetime.datetime.now()
+        c_time = d2.strftime("%H:%M")
+        y = d1.year
+        m = d1.month
+        d = d1.day
+        now_total = (int(y) * 365) + (int(m) * 30) + (int(d))
+        part = Participant.objects.all()
+        for l in part:
+            z = l.aucted_product.product.session.date.date
+            li2 = z.split('-')
+            total_time_part = (int(li2[0]) * 365) + \
+                (int(li2[1]) * 30) + (int(li2[2]))
+            if total_time_part < now_total:
+                if l.result is None:
+                    r = Result.objects.get(result="notproper")
+                    l.result = r
+                    l.save()
+        li2 = i.session.time.split(':')
+        li3 = c_time.split(':')
+        time1 = (int(li2[0]) * 60) + int(li2[1])
+        time2 = (int(li3[0]) * 60) + int(li3[1])
+        time3 = time1 + 60
+        if total_time == now_total:
+            if time1 == time2:
+                i.temp = 2
+                i.save()
+            elif time2 < time3 and time2 > time1:
+                i.temp = 2
+                i.save()
+            elif time2 > time3:
+                i.temp = 3
+                i.save()
+        elif total_time < now_total:
+
+            i.temp = 3
+            i.save()
+    d = {'pro': pro1, 'data': data, 'result': result, 'message1': message1}
+
+    return render(request, 'viewauction.html', d)
+
+
+def ViewAuction1(request, pid):
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
+
+    if request.method == "POST":
+        pro1 = Product.objects.get(id=pid)
+        auc = AuctedProduct.objects.get(product=pro1)
+        Participant.objects.create(
+            user=data, aucted_product=auc, product_id=pid)
+        return redirect('home')
+    return redirect('home')
+
+
+def productdetail(request, pid):
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
+
+    pro = Product.objects.get(id=pid)
+    end = pro.session.time.split(':')
+    end1 = ""
+    if end[0] == "23":
+        end1 = "00"
+    else:
+        end1 = str(int(end[0])+1)
+    end2 = end1+":"+end[1]
+    pro1 = AuctedProduct.objects.get(product=pro)
+
+    d = {'data': data,  'result': result,
+         'pro': pro, 'pro1': pro1, 'end2': end2}
+
+    return render(request, 'productdetail.html', d)
+
+
+def StarAutction(request, pid):
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
+
+    pro4 = Product.objects.get(id=pid)
+    end = pro4.session.time.split(':')
+    end1 = ""
+    if end[0] == "23":
+        end1 = "00"
+    else:
+        end1 = str(int(end[0]) + 1)
+    end2 = end1 + ":" + end[1]
+    c = AuctedProduct.objects.get(product=pro4)
+    pro1 = ""
+    try:
+        pro1 = Participant.objects.get(user=data, aucted_product=c)
+    except:
+        return redirect('allproduct')
+    pro1 = Participant.objects.get(user=data, aucted_product=c)
+    pro2 = Participant.objects.filter(aucted_product=c).order_by('-new_price')
+    if request.method == "POST":
+        p = request.POST["price"]
+        pro1.new_price = p
+        pro1.save()
+
+    a = pro1.aucted_product.product.session.date.date
+    li = a.split('-')
+    total_time = (int(li[0]) * 365) + (int(li[1]) * 30) + (int(li[2]))
+    d1 = datetime.date.today()
+    d2 = datetime.datetime.now()
+    c_time = d2.strftime("%H:%M")
+    y = d1.year
+    m = d1.month
+    d = d1.day
+    now_total = (int(y) * 365) + (int(m) * 30) + (int(d))
+    li2 = pro1.aucted_product.product.session.time.split(':')
+    li3 = c_time.split(':')
+    time1 = (int(li2[0]) * 60) + int(li2[1])
+    time2 = (int(li3[0]) * 60) + int(li3[1])
+    time3 = time1 + 60
+    terror = ""
+    if total_time == now_total:
+        if time1 == time2 or time2 < time3:
+            pro1.aucted_product.product.temp = 2
+            pro1.aucted_product.product.save()
+        elif time2 > time3:
+            pro1.aucted_product.product.temp = 3
+            pro1.aucted_product.product.save()
+            terror = "expire"
+    elif total_time < now_total:
+        pro1.aucted_product.product.temp = 3
+        pro1.aucted_product.product.save()
+        terror = "expire"
+    win = Participant.objects.filter(aucted_product=c).order_by('-new_price')
+    list1 = []
+    for i in win:
+        list1.append(i.id)
+    win1 = Participant.objects.get(id=list1[0])
+    if pro1.aucted_product.product.temp == 3:
+        pro1.aucted_product.winner = win1.user.user.username
+        pro1.aucted_product.save()
+        for i in pro2:
+            if i.user.user.username == pro1.aucted_product.winner:
+                res = Result.objects.get(result="Winner")
+                stat1 = Status.objects.get(status="Done")
+                pay2 = Payment.objects.get(pay="pending")
+                i.payment = pay2
+                i.result = res
+                i.aucted_product.product.status = stat1
+                i.aucted_product.product.save()
+                i.save()
+            else:
+                res1 = Result.objects.get(result="Defeat")
+                pay1 = Payment.objects.get(pay="reject")
+                i.payment = pay1
+                i.result = res1
+                i.save()
+
+    d = {'data': data,  'result': result, 'pro': pro1,
+         'pro2': pro2, 'end2': end2, 'terror': terror}
+    return render(request, 'startauction.html', d)
+
+
+def winner1(request, pid):
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
+
+    # pro2 = Product.objects.get(id=pid)
+    # au = AuctedProduct.objects.get(product=pro2)
+    # re = Result.objects.get(result="Winner")
+    # pro1 = ""
+    # try:
+    #     pro1 = Participant.objects.get(aucted_product=au, result=re)
+    # except:
+    #     pass
+
+    pro2 = Product.objects.get(id=pid)
+    au = AuctedProduct.objects.get(product=pro2)
+    re = Result.objects.get(result="Winner")
+    pro1 = Participant.objects.get(aucted_product=au, result=re)
+
+    d = {'data': data,  'result': result, 'pro': pro2, 'pro1': pro1}
+    return render(request, 'winner1.html', d)

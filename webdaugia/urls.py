@@ -93,14 +93,22 @@ urlpatterns = [
 
     # /////////////////////////////////
     path('allproduct', AllProduct, name="allproduct"),
+    path('apiauctionuserallproduct(<int:pid>)', ApiParticipateduser,
+         name="allproduapiauctionuserallproductct"),
 
-
+    path('particpateduser(<int:pid>)',
+         ParticipatedUser, name='particpateduser'),
+    path('biddingstatus2', BiddingStatus2, name='biddingstatus2'),
 
     # /////////////////////////////////
+    #     acctor
+    path('viewauction', ViewAuction, name='viewauction'),
+    path('viewauction(<int:pid>)', ViewAuction1, name='viewauction1'),
+    path('startauction(<int:pid>)', StarAutction, name='startauction'),
+    path('winner1(<int:pid>)', winner1, name='winner1'),
+    path('productdetail(<int:pid>)', productdetail, name='productdetail'),
 
 
 
-    path('', Home, name="viewAuction"),
     path('', Home, name="biddingStatus"),
-    path('', Home, name="biddingStatus2"),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
