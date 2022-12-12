@@ -1472,7 +1472,34 @@ def winner1(request, pid):
                 user=user, nameLog="Pay"+pro1.product.name, status="1", money=pro1.new_price)
         except:
             pass
-    
 
     d = {'data': data,  'result': result, 'pro': pro2, 'pro1': pro1}
     return render(request, 'winner1.html', d)
+
+
+def BiddingStatus(request):
+    data = ''
+    result = ''
+    user = User.objects.get(username=request.user.username)
+
+    if (user):
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    else:
+        user = User.objects.get(id=request.user.id)
+        try:
+            data = BidderUser.objects.get(user=user)
+            if data:
+                result = "bidder"
+        except:
+            data = AuctionUser.objects.get(user=user)
+    if data.membership.fee == "Unpaid":
+        return redirect('wallet')
+
+    pro = Participant.objects.filter(user=data)
+    d = {'data': data,  'result': result, 'pro': pro}
+    return render(request, 'bidding_status.html', d)

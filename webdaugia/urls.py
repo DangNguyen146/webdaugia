@@ -108,7 +108,6 @@ urlpatterns = [
     path('winner1(<int:pid>)', winner1, name='winner1'),
     path('productdetail(<int:pid>)', productdetail, name='productdetail'),
 
+    path('bidding_status', BiddingStatus, name='bidding_status'),
 
-
-    path('', Home, name="biddingStatus"),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

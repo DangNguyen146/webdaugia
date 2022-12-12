@@ -66,9 +66,9 @@
                             <span class="navlink {% block auction %} {% endblock %}">Auction</span>
                         </a>
                     </li>
-                    <li class="nav-item me-3 me-lg-1 fw-bold">
-                        <a class="nav-link" href="{% url 'biddingStatus' %}">
-                            <span class="navlink ">Bidding Status</span>
+                    <li class="nav-item me-3 me-lg-1 fw-bold {% block biddingstatusActive2 %}{% endblock %}">
+                        <a class="nav-link" href="{% url 'bidding_status' %}">
+                            <span class="navlink {% block biddingstatus2 %}{% endblock %}">Bidding Status</span>
                         </a>
                     </li>
                     {% else %}
